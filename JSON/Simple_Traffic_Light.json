@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "author": "Anonymous maker",
+  "author": "Junaid Billah",
   "editor": "wokwi",
   "parts": [
     { "type": "wokwi-breadboard-mini", "id": "bb1", "top": 56.2, "left": -108, "attrs": {} },
