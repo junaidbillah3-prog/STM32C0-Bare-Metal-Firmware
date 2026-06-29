@@ -25,7 +25,7 @@ int main(void){
   RCC->APBENR2 |= RCC_APBENR2_TIM1EN;
   RCC->IOPENR |= RCC_IOPENR_GPIOAEN;
 
-  GPIOA->MODER = (GPIOA->MODER & ~(GPIO_MODER_MODE1_Msk|GPIO_MODER_MODE4_Msk|GPIO_MODER_MODE11_Msk))|GPIO_MODER_MODE1_0|GPIO_MODER_MODE4_0|GPIO_MODER_MODE11_0;
+  GPIOA->MODER = (GPIOA->MODER & ~(GPIO_MODER_MODE1_Msk|GPIO_MODER_MODE4_Msk|GPIO_MODER_MODE11_Msk|GPIO_MODER_MODE12_Msk))|GPIO_MODER_MODE1_0|GPIO_MODER_MODE4_0|GPIO_MODER_MODE11_0|GPIO_MODER_MODE12_0;
   
   TIM1 -> PSC= clock;
   TIM1 -> CR1 |= TIM_CR1_CEN;
@@ -40,8 +40,14 @@ int main(void){
     GPIOA -> BSRR = (1U <<(Pin4 + reset));
 
     GPIOA -> BSRR = (1U << Pin11);
-    delay_ms(3000);
+    for(int i=0; i<1000; i++){
+      GPIOA -> BSRR =(1U<<Pin12);
+      delay_us(500);
+      GPIOA->BSRR=(1U<<(Pin12 + reset));
+      delay_us(500);
+    }
+    delay_ms(2000);
     GPIOA -> BSRR = (1U << (Pin11 + reset));
     
   }
-} 
+}
